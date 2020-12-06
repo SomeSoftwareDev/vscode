@@ -2600,6 +2600,11 @@ export interface IEditorParameterHintOptions {
 	 * Defaults to false.
 	 */
 	cycle?: boolean;
+	/**
+	 * Controls position of the widget.
+	 * Defaults to above.
+	 */
+	position?: 'above' | 'below';
 }
 
 export type InternalParameterHintOptions = Readonly<Required<IEditorParameterHintOptions>>;
@@ -2609,7 +2614,8 @@ class EditorParameterHints extends BaseEditorOption<EditorOption.parameterHints,
 	constructor() {
 		const defaults: InternalParameterHintOptions = {
 			enabled: true,
-			cycle: false
+			cycle: false,
+			position: 'above'
 		};
 		super(
 			EditorOption.parameterHints, 'parameterHints', defaults,
@@ -2624,6 +2630,17 @@ class EditorParameterHints extends BaseEditorOption<EditorOption.parameterHints,
 					default: defaults.cycle,
 					description: nls.localize('parameterHints.cycle', "Controls whether the parameter hints menu cycles or closes when reaching the end of the list.")
 				},
+				'editor.parameterHints.position': {
+					type: 'string',
+					enum: ['above', 'below'],
+					enumDescriptions: [
+						nls.localize('parameterHints.position.above', "The parameter hints widget appears above the cursor."),
+						nls.localize('parameterHints.position.below', "The parameter hints widget appears below the cursor."),
+					],
+					default: defaults.position,
+					description: nls.localize('parameterHints.position', "Controls whether the parameters hints widget is shown above or below the cursor.")
+				}
+
 			}
 		);
 	}
@@ -2635,7 +2652,8 @@ class EditorParameterHints extends BaseEditorOption<EditorOption.parameterHints,
 		const input = _input as IEditorParameterHintOptions;
 		return {
 			enabled: boolean(input.enabled, this.defaultValue.enabled),
-			cycle: boolean(input.cycle, this.defaultValue.cycle)
+			cycle: boolean(input.cycle, this.defaultValue.cycle),
+			position: stringSet<'above' | 'below'>(input.position, this.defaultValue.position, ['above', 'below'])
 		};
 	}
 }
