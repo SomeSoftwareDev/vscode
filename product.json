@@ -23,6 +23,33 @@
 	"reportIssueUrl": "https://github.com/microsoft/vscode/issues/new",
 	"urlProtocol": "code-oss",
 	"webviewContentExternalBaseUrlTemplate": "https://{{uuid}}.vscode-webview.net/{{quality}}/{{commit}}/out/vs/workbench/contrib/webview/browser/pre/",
+	"auth": {
+		"loginUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+		"tokenUrl": "https://login.microsoftonline.com/common/oauth2/token",
+		"redirectUrl": "https://vscode-redirect.azurewebsites.net/",
+		"clientId": "aebc6443-996d-45c2-90f0-388ff96faa56"
+	},
+	"configurationSync.store": {
+		"url": "https://vscode-sync.trafficmanager.net/",
+		"stableUrl": "https://vscode-sync.trafficmanager.net/",
+		"insidersUrl": "https://vscode-sync-insiders.trafficmanager.net/",
+		"canSwitch": false,
+		"authenticationProviders": {
+			"microsoft": {
+				"scopes": [
+					"openid",
+					"profile",
+					"email",
+					"offline_access"
+				]
+			},
+			"github": {
+				"scopes": [
+					"user:email"
+				]
+			}
+		}
+	},
 	"extensionAllowedProposedApi": [
 		"ms-vscode.vscode-js-profile-flame",
 		"ms-vscode.vscode-js-profile-table",
